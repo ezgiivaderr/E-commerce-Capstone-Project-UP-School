@@ -1,9 +1,7 @@
 package com.ezgikara.gathereality.data.mapper
 
-
 import com.ezgikara.gathereality.data.model.response.Product
 import com.ezgikara.gathereality.data.model.response.ProductEntity
-
 import com.ezgikara.gathereality.data.model.response.ProductUI
 
 fun Product.mapToProductUI(favorites: List<Int>) =

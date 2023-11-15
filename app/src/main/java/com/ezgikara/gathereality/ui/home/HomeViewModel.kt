@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezgikara.gathereality.common.Resource
 import com.ezgikara.gathereality.data.model.response.ProductUI
-import com.ezgikara.gathereality.data.repository.AuthRepository
 import com.ezgikara.gathereality.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,8 +18,6 @@ class HomeViewModel @Inject constructor(
 
     private var _homeState = MutableLiveData<HomeState>()
     val homeState: LiveData<HomeState> get() = _homeState
-
-
     fun getProducts() = viewModelScope.launch {
         _homeState.value = HomeState.Loading
 
@@ -30,7 +27,6 @@ class HomeViewModel @Inject constructor(
             is Resource.Error -> HomeState.ShowPopUp(result.errorMessage)
         }
     }
-
     fun getSaleProducts() = viewModelScope.launch {
         _homeState.value = HomeState.Loading
         _homeState.value = when (val result = productRepository.getSaleProducts()) {
@@ -39,7 +35,6 @@ class HomeViewModel @Inject constructor(
             is Resource.Error -> HomeState.ShowPopUp(result.errorMessage)
         }
     }
-
     fun setFavoriteState(product: ProductUI) = viewModelScope.launch {
         if (product.isfav) {
             productRepository.deleteFromFavorites(product)
@@ -50,7 +45,6 @@ class HomeViewModel @Inject constructor(
         getSaleProducts()
     }
 }
-
 sealed interface HomeState {
     object Loading : HomeState
     data class SuccessProductState(val products: List<ProductUI>) : HomeState

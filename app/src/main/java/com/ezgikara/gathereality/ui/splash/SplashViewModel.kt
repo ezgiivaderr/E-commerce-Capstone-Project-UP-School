@@ -17,14 +17,12 @@ class SplashViewModel @Inject constructor(
 
     private var _splashState = MutableLiveData<SplashState>()
     val splashState: LiveData<SplashState> get() = _splashState
-
     init {
         viewModelScope.launch {
             delay(3000)
             checkUser()
         }
     }
-
     private fun checkUser() = viewModelScope.launch {
         _splashState.value = if (authRepository.isUserLoggedIn()) {
             SplashState.GoToHome
@@ -33,7 +31,6 @@ class SplashViewModel @Inject constructor(
         }
     }
 }
-
 sealed interface SplashState {
     object GoToSignIn : SplashState
     object GoToHome : SplashState

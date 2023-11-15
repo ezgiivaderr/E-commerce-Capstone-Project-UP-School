@@ -11,9 +11,7 @@ import com.ezgikara.gathereality.R
 import com.ezgikara.gathereality.common.gone
 import com.ezgikara.gathereality.common.viewBinding
 import com.ezgikara.gathereality.common.visible
-
 import com.ezgikara.gathereality.databinding.FragmentSignUpBinding
-
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +21,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private val binding by viewBinding(FragmentSignUpBinding::bind)
 
     private val viewModel by viewModels<SignUpViewModel>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -35,12 +32,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 )
             }
         }
-
         observeData()
-
     }
-
-
     private fun observeData() = with(binding) {
         viewModel.signUpState.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -58,6 +51,4 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             }
         }
     }
-
-
 }

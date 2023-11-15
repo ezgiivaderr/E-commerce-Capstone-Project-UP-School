@@ -4,13 +4,11 @@ import com.ezgikara.gathereality.common.Resource
 import com.ezgikara.gathereality.data.mapper.mapProductEntityToProductUI
 import com.ezgikara.gathereality.data.mapper.mapProductToProductUI
 import com.ezgikara.gathereality.data.mapper.mapToProductEntity
-
 import com.ezgikara.gathereality.data.mapper.mapToProductUI
 import com.ezgikara.gathereality.data.model.request.AddToCartRequest
 import com.ezgikara.gathereality.data.model.request.ClearCartRequest
 import com.ezgikara.gathereality.data.model.request.DeleteFromCartRequest
 import com.ezgikara.gathereality.data.model.response.BaseResponse
-
 import com.ezgikara.gathereality.data.model.response.ProductUI
 import com.ezgikara.gathereality.data.source.local.ProductDao
 import com.ezgikara.gathereality.data.source.remote.ProductService
@@ -21,7 +19,6 @@ class ProductRepository (
     private val productService:ProductService,
     private val productDao: ProductDao
 ) {
-
     suspend fun getProducts(): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
@@ -37,7 +34,6 @@ class ProductRepository (
                 Resource.Error(e.message.orEmpty())
             }
         }
-
     suspend fun getSaleProducts(): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
@@ -83,7 +79,6 @@ class ProductRepository (
                 Resource.Error(e.message.orEmpty())
             }
         }
-
     suspend fun addToCart(userId: String, productId: Int): Resource<BaseResponse> =
         withContext(Dispatchers.IO) {
             try {
@@ -164,7 +159,4 @@ class ProductRepository (
     suspend fun clearFavorites() {
         productDao.clearFavorites()
     }
-
-
-
 }

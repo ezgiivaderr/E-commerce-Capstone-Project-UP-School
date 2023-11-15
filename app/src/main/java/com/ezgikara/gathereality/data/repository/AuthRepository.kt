@@ -1,16 +1,12 @@
 package com.ezgikara.gathereality.data.repository
 
-
 import com.ezgikara.gathereality.common.Resource
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 
 class AuthRepository(private val firebaseAuth: FirebaseAuth) {
-
     fun isUserLoggedIn() = firebaseAuth.currentUser != null         //splash kontrol
-
     fun getUserId() = firebaseAuth.currentUser?.uid.orEmpty()
-
     suspend fun signIn(email: String, password: String): Resource<Unit> {
 
         return try {
@@ -26,7 +22,6 @@ class AuthRepository(private val firebaseAuth: FirebaseAuth) {
             Resource.Error("Account not found")
         }
     }
-
     suspend fun signUp(email: String, password: String): Resource<Unit> {
 
         return try {
@@ -42,6 +37,4 @@ class AuthRepository(private val firebaseAuth: FirebaseAuth) {
             Resource.Error("Invalid login credentials")
         }
     }
-
-    /*fun logOut() = firebaseAuth.signOut()*/
 }

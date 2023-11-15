@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ezgikara.gathereality.R
@@ -24,7 +22,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private val viewModel by viewModels<SearchViewModel>()
 
     private val searchAdapter = SearchAdapter(onProductClick = ::onProductClick)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,7 +34,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return false
                 }
-
                 override fun onQueryTextChange(newText: String?): Boolean {
                     if (newText != null && newText.length > 3) {
                         viewModel.searchProduct(newText)
@@ -47,8 +43,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     return true
                 }
             })
-
-    }
+        }
     }
     private fun observeData() = with(binding) {
         viewModel.searchState.observe(viewLifecycleOwner) { state ->
@@ -74,7 +69,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
         }
     }
-
     private fun onProductClick(id: Int) {
         findNavController().navigate(SearchFragmentDirections.searchtodetail(id))
     }

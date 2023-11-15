@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezgikara.gathereality.common.Resource
-
 import com.ezgikara.gathereality.data.model.response.ProductUI
 import com.ezgikara.gathereality.data.repository.AuthRepository
 import com.ezgikara.gathereality.data.repository.ProductRepository
@@ -56,9 +55,7 @@ class CartViewModel @Inject constructor(
      fun clearTotalAmount() {
         _totalAmount.value = 0.0
     }
-
 }
-
 sealed interface CartState {
     object Loading : CartState
     data class SuccessState(val products: List<ProductUI>) : CartState

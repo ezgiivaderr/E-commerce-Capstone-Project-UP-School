@@ -17,7 +17,6 @@ class SignInViewModel @Inject constructor(
 
     private var _signInState = MutableLiveData<SignInState>()
     val signInState: LiveData<SignInState> get() = _signInState
-
     fun signIn(email: String, password: String) = viewModelScope.launch {
         if (checkFields(email, password)) {
             _signInState.value = SignInState.Loading
@@ -29,29 +28,24 @@ class SignInViewModel @Inject constructor(
             }
         }
     }
-
     private fun checkFields(email: String, password: String): Boolean {
         return when {
             email.isEmpty() -> {
                 _signInState.value = SignInState.ShowPopUp("Email field must be filled out.")
                 false
             }
-
             password.isEmpty() -> {
                 _signInState.value = SignInState.ShowPopUp("Password field must be filled out.")
                 false
             }
-
             password.length < 6 -> {
                 _signInState.value = SignInState.ShowPopUp("Password field cannot be shorter than 6 characters")
                 false
             }
-
             else -> true
         }
     }
 }
-
 sealed interface SignInState {
     object Loading : SignInState
     object GoToHome: SignInState

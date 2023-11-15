@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.R
 import com.ezgikara.gathereality.common.gone
 import com.ezgikara.gathereality.common.viewBinding
 import com.ezgikara.gathereality.common.visible
@@ -18,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private val binding by viewBinding (ActivityMainBinding::inflate)
 
     private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -28,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         NavigationUI.setupWithNavController(binding.buttomNavbar, navController)
-
 
         navHostFragment.navController.addOnDestinationChangedListener{ _, destination, _ ->
 
@@ -45,7 +42,6 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     binding.buttomNavbar.visible()
                 }
-
             }
         }
     }

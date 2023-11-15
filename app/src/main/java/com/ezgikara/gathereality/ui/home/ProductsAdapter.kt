@@ -14,7 +14,6 @@ class ProductsAdapter(
     private val onProductClick: (Int) -> Unit,
     private val onFavClick: (ProductUI) -> Unit
 ) : ListAdapter<ProductUI, ProductsAdapter.ProductViewHolder>(ProductDiffUtilCallBack()) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder(
             ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false),
@@ -22,10 +21,8 @@ class ProductsAdapter(
             onFavClick
         )
     }
-
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) =
         holder.bind(getItem(position))
-
     class ProductViewHolder(
         private val binding: ItemProductBinding,
         private val onProductClick: (Int) -> Unit,
@@ -53,12 +50,10 @@ class ProductsAdapter(
             }
         }
     }
-
     class ProductDiffUtilCallBack : DiffUtil.ItemCallback<ProductUI>() {
         override fun areItemsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
             return oldItem.id == newItem.id
         }
-
         override fun areContentsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean {
             return oldItem == newItem
         }

@@ -22,7 +22,6 @@ class DetailViewModel @Inject constructor(
     val detailState: LiveData<DetailState> get() = _detailState
 
     private var favProduct: ProductUI? = null
-
     fun getProductDetail(id: Int) = viewModelScope.launch {
         _detailState.value = DetailState.Loading
 
@@ -32,11 +31,9 @@ class DetailViewModel @Inject constructor(
             is Resource.Error -> DetailState.ShowPopUp(result.errorMessage)
         }
     }
-
     fun addToCart(productId: Int) = viewModelScope.launch {
         productRepository.addToCart(authRepository.getUserId(), productId)
     }
-
     fun setFavoriteState(id: Int) = viewModelScope.launch {
         favProduct?.let { product ->
             if (product.isfav) {
@@ -44,11 +41,10 @@ class DetailViewModel @Inject constructor(
             } else {
                 productRepository.addToFavorites(product)
             }
-            getProductDetail(id)
         }
+        getProductDetail(id)
     }
 }
-
 sealed interface DetailState {
     object Loading : DetailState
     data class SuccessState(val product: ProductUI) : DetailState

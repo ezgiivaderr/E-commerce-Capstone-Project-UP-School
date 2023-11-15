@@ -12,11 +12,9 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.ezgikara.gathereality.R
 import com.ezgikara.gathereality.common.gone
-
 import com.ezgikara.gathereality.common.viewBinding
 import com.ezgikara.gathereality.common.visible
 import com.ezgikara.gathereality.databinding.FragmentDetailBinding
-import com.ezgikara.gathereality.ui.home.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +26,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val viewModel by viewModels<DetailViewModel>()
 
     private val args by navArgs<DetailFragmentArgs>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,10 +42,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 viewModel.setFavoriteState(args.id)
             }
         }
-
         observeData()
     }
-
     private fun observeData() = with(binding) {
         viewModel.detailState.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -71,14 +66,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         tVSaleprice.gone()
                     }
                 }
-
                 is DetailState.EmptyScreen -> {
                     progressBar.gone()
                     ivEmpty.visible()
                     tvEmpty.visible()
                     tvEmpty.text = state.failMessage
                 }
-
                 is DetailState.ShowPopUp -> {
                     progressBar.gone()
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()
@@ -86,6 +79,4 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         }
     }
-
-
 }

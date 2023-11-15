@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ezgikara.gathereality.R
 import com.ezgikara.gathereality.common.gone
@@ -22,11 +21,8 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
     private val binding by viewBinding (FragmentPaymentBinding::bind)
 
     private val viewModel by viewModels<PaymentViewModel>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         with(binding) {
 
@@ -41,11 +37,8 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
                 )
                 viewModel.clearCart()
             }
-
         }
         observeData()
-
-
     }
 
    private fun observeData() = with(binding) {
@@ -59,10 +52,8 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
             }
             is PaymentState.ShowSnackbar -> {
                 progressBar3.gone()
-                Snackbar.make(requireView(), state.errorMessage, 1000).show()
-            }
+                Snackbar.make(requireView(), state.errorMessage, 1000).show() }
         }
-    }
-}
-
+     }
+  }
 }

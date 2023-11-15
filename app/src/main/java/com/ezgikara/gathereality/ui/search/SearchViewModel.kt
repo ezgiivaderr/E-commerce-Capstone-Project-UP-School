@@ -21,7 +21,6 @@ class SearchViewModel @Inject constructor(
 
     private var _searchState = MutableLiveData<SearchState>()
     val searchState: LiveData<SearchState> get() = _searchState
-
     fun searchProduct(query: String) = viewModelScope.launch {
         _searchState.value = SearchState.Loading
 
@@ -31,9 +30,7 @@ class SearchViewModel @Inject constructor(
             is Resource.Error -> SearchState.ShowPopUp(result.errorMessage)
         }
     }
-
 }
-
 sealed interface SearchState {
     object  Loading : SearchState
     data class SuccessState(val products: List<ProductUI>) : SearchState

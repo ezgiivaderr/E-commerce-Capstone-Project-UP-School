@@ -26,7 +26,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val productAdapter = ProductsAdapter(onProductClick = ::onProductClick, onFavClick = ::onFavClick)
 
     private val saleProductsAdapter = SaleProductsAdapter(onProductClick = ::onProductClick, onFavClick = ::onFavClick)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,10 +36,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             rvProduct.adapter = productAdapter
             rvSaleproduct.adapter = saleProductsAdapter
         }
-
         observeData()
     }
-
     private fun observeData() = with(binding) {
         viewModel.homeState.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -70,15 +67,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
-}
-
+   }
     private fun onProductClick(id: Int) {
     findNavController().navigate(HomeFragmentDirections.hometodetail(id))
-
     }
     private fun onFavClick(product: ProductUI) {
         viewModel.setFavoriteState(product)
     }
-
-
 }

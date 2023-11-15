@@ -13,7 +13,6 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ProductService {
-
     @GET("get_products.php")
     suspend fun getProducts(): Response<GetProductsResponse>
 
@@ -49,9 +48,4 @@ interface ProductService {
     suspend fun searchProduct(
         @Query("query") query : String
     ): Response<GetProductsResponse>
-
-
-
-
-
 }

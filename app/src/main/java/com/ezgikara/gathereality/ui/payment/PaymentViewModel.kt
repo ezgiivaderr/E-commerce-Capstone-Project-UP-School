@@ -7,9 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.ezgikara.gathereality.common.Resource
 import com.ezgikara.gathereality.data.repository.AuthRepository
 import com.ezgikara.gathereality.data.repository.ProductRepository
-import com.ezgikara.gathereality.ui.signup.SignUpState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,7 +27,6 @@ class PaymentViewModel @Inject constructor(
             else -> PaymentState.ShowSnackbar("Failed")
         }
     }
-
     fun payment(name: String, cardNum: String, month: String, year: String, cvc: String, address: String) = viewModelScope.launch {
         _paymentState.value = PaymentState.Loading
 
@@ -40,7 +37,6 @@ class PaymentViewModel @Inject constructor(
             _paymentState.value = PaymentState.ShowSnackbar("Please enter the empty fields correctly.")
         }
     }
-
     private fun isValidInput(
         name: String,
         cardNum: String,
@@ -56,10 +52,7 @@ class PaymentViewModel @Inject constructor(
                 cvc.length == 3 &&
                 address.isNotEmpty()
     }
-
-
 }
-
 sealed interface PaymentState {
     object Loading : PaymentState
     object SuccessState: PaymentState
